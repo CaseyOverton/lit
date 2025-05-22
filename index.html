@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <head>
-  <script type="module" src="/my-element.js"></script>
+  <script type="module" src="/components/header.js"></script>
   <style>
-    .mars {
-      --planet-color: red;
+    body { 
+      background-image: url("/src/assets/animeMoon.png");
     }
   </style>
 </head>
 <body>
   <my-element></my-element>
-  <hr />
-  <my-element class="mars" planet="Mars"></my-element>
+  <my-api></my-api>
 </body>
