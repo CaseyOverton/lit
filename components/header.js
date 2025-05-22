@@ -1,29 +1,29 @@
-@customElement('my-header')
-export class MyHeader extends LitElement {
-  // Optional: Define reactive properties
-  @property() title = 'Default Title';
+import {LitElement, html, css} from 'lit';
 
-  // Define styles (optional, but recommended for encapsulation)
+export class MyElement extends LitElement {
+  static properties = {
+    header: {},
+  };
   static styles = css`
-    :host {
-      display: block;
-      background-color: #333;
-      color: white;
-      padding: 10px;
+    .header {
       text-align: center;
-    }
-
-    h1 {
-      margin: 0;
+      padding: 1rem;
+      color: white;
+      font-family: 'Copperplate';
     }
   `;
 
-  // Render method to define the component's HTML
+  constructor() {
+    super();
+    this.header= 'Fanime';
+  }
+
   render() {
     return html`
-      <h1>${this.title}</h1>
-      <p> hi </p>
-      <slot></slot>
+      <header>
+        <h1 class="header">${this.header}</h1>
+      </header>
     `;
   }
 }
+customElements.define('my-element', MyElement);
