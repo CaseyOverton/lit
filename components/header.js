@@ -1,6 +1,6 @@
 import {LitElement, html, css} from 'lit';
 
-export class MyElement extends LitElement {
+export class Header extends LitElement {
   static properties = {
     header: {},
   };
@@ -26,4 +26,4 @@ export class MyElement extends LitElement {
     `;
   }
 }
-customElements.define('my-element', MyElement);
+customElements.define('my-header', Header);

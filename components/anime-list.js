@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
-import { state } from 'lit/decorators.js';
 import './media-card.js'; 
+import './modal.js'
 
 export class AnimeList extends LitElement {
   static styles = css`
@@ -71,13 +71,11 @@ export class AnimeList extends LitElement {
 
   render() {
     return html`
-      <h2>Anime List</h2>
       <div class="grid" @card-selected=${this._handleCardSelected}>
         ${this.animeData.map(anime => html`
           <media-card
             .title=${anime.attributes.canonicalTitle}
-            .image=${anime.attributes.posterImage?.tiny}
-            .description=${anime.attributes.synopsis?.slice(0, 100) + '...'}
+            .description=${anime.attributes.synopsis}
           ></media-card>
         `)}
       </div>
@@ -86,11 +84,10 @@ export class AnimeList extends LitElement {
         <div class="modal-overlay" @click=${this._closeModal}>
           <div class="modal" @click=${e => e.stopPropagation()}>
             <button @click=${this._closeModal}>&times;</button>
-            <media-card
+            <my-modal
               .title=${this.selected.title}
-              .image=${this.selected.image}
               .description=${this.selected.description}
-            ></media-card>
+            ></my-modal>
           </div>
         </div>
       ` : ''}
