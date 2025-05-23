@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 
-class MediaCard extends LitElement {
+class MyModal extends LitElement {
   static properties = {
     title: { type: String },
     description: { type: String }
@@ -10,7 +10,7 @@ class MediaCard extends LitElement {
     .card {
       border: 1px solid #ccc;
       border-radius: 12px;
-      overflow: scroll;
+      overflow: hidden;
       width: 250px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       --angle: 45deg; 
@@ -26,7 +26,6 @@ class MediaCard extends LitElement {
     }
 
     .content {
-      flex: 1;
       padding: 1rem;
     }
 
@@ -43,7 +42,7 @@ class MediaCard extends LitElement {
 
   render() {
     return html`
-      <div class="card" @click="${this._onClick}">
+      <div class="main-modal">
         <div class="content">
           <h3>${this.title}</h3>
           <p>${this.description}</p>
@@ -51,17 +50,6 @@ class MediaCard extends LitElement {
       </div>
     `;
   }
-
-  _onClick() {
-    this.dispatchEvent(new CustomEvent('card-selected', {
-      detail: {
-        title: this.title,
-        description: this.description
-      },
-      bubbles: true,
-      composed: true
-    }));
-  }
 }
 
-customElements.define('media-card', MediaCard);
+customElements.define('my-modal', MyModal);
