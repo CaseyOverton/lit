@@ -13,6 +13,10 @@ class MediaCard extends LitElement {
       overflow: hidden;
       width: 250px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      --angle: 45deg; 
+      background: white;
+      opacity: 0.7;
+      height: 11rem;
     }
 
     img {
@@ -38,13 +42,24 @@ class MediaCard extends LitElement {
 
   render() {
     return html`
-      <div class="card">
+      <div class="card" @click="${this._onClick}">
         <div class="content">
           <h3>${this.title}</h3>
           <p>${this.description}</p>
         </div>
       </div>
     `;
+  }
+
+  _onClick() {
+    this.dispatchEvent(new CustomEvent('card-selected', {
+      detail: {
+        title: this.title,
+        description: this.description
+      },
+      bubbles: true,
+      composed: true
+    }));
   }
 }
 
