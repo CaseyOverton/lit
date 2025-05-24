@@ -75,6 +75,7 @@ export class AnimeList extends LitElement {
         ${this.animeData.map(anime => html`
           <media-card
             .title=${anime.attributes.canonicalTitle}
+            .image=${anime.attributes.posterImage.small}
             .description=${anime.attributes.synopsis}
           ></media-card>
         `)}
@@ -86,6 +87,7 @@ export class AnimeList extends LitElement {
             <button @click=${this._closeModal}>&times;</button>
             <my-modal
               .title=${this.selected.title}
+              .image=${this.selected.image}
               .description=${this.selected.description}
             ></my-modal>
           </div>
