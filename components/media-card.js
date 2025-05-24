@@ -32,7 +32,7 @@ class MediaCard extends LitElement {
 
     h3 {
       margin: 0 0 0.5rem;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       text-align: center;
     }
 
