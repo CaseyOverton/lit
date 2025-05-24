@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { html, css, LitElement } from 'https://unpkg.com/lit@latest?module';
 
 class MediaCard extends LitElement {
   static properties = {
@@ -10,12 +10,12 @@ class MediaCard extends LitElement {
     .card {
       border: 1px solid #ccc;
       border-radius: 12px;
-      overflow: scroll;
+      overflow: hidden;
       width: 250px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       --angle: 45deg; 
       background: white;
-      opacity: 0.7;
+      opacity: 0.9;
       height: 11rem;
     }
 
@@ -26,7 +26,6 @@ class MediaCard extends LitElement {
     }
 
     .content {
-      flex: 1;
       padding: 1rem;
     }
 

@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { html, css, LitElement } from 'https://unpkg.com/lit@latest?module';
 import './media-card.js'; 
 import './modal.js'
 
