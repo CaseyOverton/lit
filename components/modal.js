@@ -31,7 +31,8 @@ class MyModal extends LitElement {
 
     h3 {
       margin: 0 0 0.5rem;
-      font-size: 1.1rem;
+      font-size: 2rem;
+      text-align: center;
     }
 
     p {
@@ -40,13 +41,13 @@ class MyModal extends LitElement {
     }
   `;
 
-  render() {
+    render() {
     return html`
-      <div class="main-modal">
-        <div class="content">
-          <h3>${this.title}</h3>
-          <p>${this.description}</p>
-        </div>
+        <div class="main-modal">
+            <div class="content">
+                <h3>${this.title}</h3>
+                <p>${this.description}</p>
+            </div>
       </div>
     `;
   }
