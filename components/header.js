@@ -10,12 +10,13 @@ export class Header extends LitElement {
       padding: 1rem;
       color: white;
       font-family: 'Copperplate';
+      font-size: 4rem;
     }
   `;
 
   constructor() {
     super();
-    this.header= 'Fanime';
+    this.header = 'Fanime';
   }
 
   render() {
