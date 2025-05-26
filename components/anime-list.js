@@ -10,7 +10,19 @@ export class AnimeList extends LitElement {
       gap: 16px;
       align-items: center;
       justify-content: center;
+      margin-bottom: 2rem;
     }
+    button {
+      height: 4rem;
+      width: 4rem;
+      font-size: 2rem;
+
+      &.prev,
+      &.next {
+        width: 10rem;
+      }
+    }
+
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -45,12 +57,18 @@ export class AnimeList extends LitElement {
   static properties = {
     animeData: { type: Array },
     selected: { type: Object },
+    currentPage: { type: Number },
+    itemsPerPage: { type: Number },
+    hasNextPage: { type: Boolean },
   };
 
   constructor() {
     super();
     this.animeData = [];
     this.selected = null;
+    this.currentPage = 1;
+    this.itemsPerPage = 10;
+    this.hasNextPage = true;
   }
 
   connectedCallback() {
@@ -60,15 +78,47 @@ export class AnimeList extends LitElement {
 
   async fetchAnime() {
     try {
-      const res = await fetch('https://kitsu.io/api/edge/anime?page[limit]=10');
+      const offset = (this.currentPage - 1) * this.itemsPerPage;
+      const res = await fetch(
+        `https://kitsu.io/api/edge/anime?page[limit]=${this.itemsPerPage}&page[offset]=${offset}`,
+      );
       const json = await res.json();
       this.animeData = json.data;
+      this.hasNextPage = json.data.length === this.itemsPerPage;
     } catch (e) {
       console.error('API error:', e);
     }
   }
 
+  _prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.fetchAnime();
+    }
+  }
+
+  _nextPage() {
+    if (this.hasNextPage) {
+      this.currentPage++;
+      this.fetchAnime();
+    }
+  }
+
+  _goToPage(page) {
+    if (page !== this.currentPage) {
+      this.currentPage = page;
+      this.fetchAnime();
+    }
+  }
+
   render() {
+    // For demo, show 5 page buttons max starting from page 1
+    const pageButtons = [];
+    const maxPages = 5;
+    for (let i = 1; i <= maxPages; i++) {
+      pageButtons.push(i);
+    }
+
     return html`
       <div class="grid" @card-selected=${this._handleCardSelected}>
         ${this.animeData.map(
@@ -96,6 +146,18 @@ export class AnimeList extends LitElement {
             </div>
           `
         : ''}
+      <div class="pagination-controls">
+        <button class="prev" @click=${this._prevPage} ?disabled=${this.currentPage === 1}>←</button>
+
+        ${pageButtons.map(
+          (page) => html`
+            <button class=${page === this.currentPage ? 'active' : ''} @click=${() => this._goToPage(page)}>
+              ${page}
+            </button>
+          `,
+        )}
+        <button class="next" @click=${this._nextPage} ?disabled=${!this.hasNextPage}>→</button>
+      </div>
     `;
   }
 

@@ -5,7 +5,7 @@ class MyModal extends LitElement {
     title: { type: String },
     description: { type: String },
   };
-       
+
   static styles = css`
     .card {
       border: 1px solid #ccc;
